@@ -9,3 +9,6 @@
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
+
+# GitHub Linguist language detection
+*.blade.php linguist-language=PHP
