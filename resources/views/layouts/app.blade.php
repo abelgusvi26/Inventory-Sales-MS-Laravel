@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Dashboard') - HeavyEquip Inventory & Sales</title>
+    <title>@yield('title', 'Dashboard') - MotoParts Pro (Suku Cadang Motor)</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --primary: #f59e0b; /* Heavy equipment amber/yellow */
-            --primary-dark: #d97706;
-            --primary-light: #fef3c7;
+            --primary: #ef4444; /* Racing Red for Motorcycle Parts */
+            --primary-dark: #dc2626;
+            --primary-light: #fee2e2;
             --secondary: #0ea5e9;
-            --dark-bg: #0f172a;
-            --sidebar-bg: #1e293b;
+            --dark-bg: #090d16;
+            --sidebar-bg: #0f172a;
             --card-bg: #ffffff;
             --body-bg: #f8fafc;
             --text-main: #1e293b;
@@ -76,15 +76,15 @@
         .sidebar-brand .logo-icon {
             width: 44px;
             height: 44px;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
             border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #0f172a;
+            color: #ffffff;
             font-size: 1.3rem;
             font-weight: 800;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
         }
 
         .sidebar-brand .brand-text h2 {
@@ -578,11 +578,11 @@
     <aside class="sidebar">
         <div class="sidebar-brand">
             <div class="logo-icon">
-                <i class="fa-solid fa-truck-monster"></i>
+                <i class="fa-solid fa-motorcycle"></i>
             </div>
             <div class="brand-text">
-                <h2>HEAVY EQUIP</h2>
-                <p>Inventory & Sales MS</p>
+                <h2>MOTOPARTS PRO</h2>
+                <p>Sparepart Sepeda Motor</p>
             </div>
         </div>
 

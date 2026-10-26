@@ -23,7 +23,7 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                 <div class="form-group">
                     <label class="form-label" for="code">Kode Pemasok <span class="required">*</span></label>
-                    <input type="text" id="code" name="code" class="form-control font-mono @error('code') is-invalid @enderror" value="{{ old('code') }}" placeholder="Contoh: SUP-UT" required>
+                    <input type="text" id="code" name="code" class="form-control font-mono @error('code') is-invalid @enderror" value="{{ old('code') }}" placeholder="Contoh: SUP-AHM" required>
                     @error('code')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -31,7 +31,7 @@
 
                 <div class="form-group">
                     <label class="form-label" for="name">Nama Sales / PIC Kontak <span class="required">*</span></label>
-                    <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Contoh: Bpk. Heru / PT United Tractors" required>
+                    <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Contoh: Sales AHM Depot / PT Astra Honda Motor" required>
                     @error('name')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -40,7 +40,7 @@
 
             <div class="form-group">
                 <label class="form-label" for="company_name">Nama Resmi Perusahaan (PT / CV)</label>
-                <input type="text" id="company_name" name="company_name" class="form-control @error('company_name') is-invalid @enderror" value="{{ old('company_name') }}" placeholder="Contoh: PT United Tractors Parts Supply">
+                <input type="text" id="company_name" name="company_name" class="form-control @error('company_name') is-invalid @enderror" value="{{ old('company_name') }}" placeholder="Contoh: PT Astra Honda Motor Parts Depot">
                 @error('company_name')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

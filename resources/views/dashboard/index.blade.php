@@ -91,21 +91,21 @@
 
 @if(Auth::user()->isCustomer())
     <!-- Customer Specific Dashboard View -->
-    <div class="card" style="margin-bottom: 24px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white;">
-        <div class="card-body" style="padding: 24px 28px;">
+    <div class="card" style="margin-bottom: 24px; position: relative; overflow: hidden; background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%), url('{{ asset('images/dashboard_banner.jpg') }}') center/cover no-repeat; color: white; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+        <div class="card-body" style="padding: 24px 28px; backdrop-filter: blur(4px);">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
                 <div>
-                    <span class="user-role-badge role-customer" style="margin-bottom: 10px;">PORTAL PELANGGAN RESMI</span>
-                    <h2 style="font-size: 1.5rem; font-weight: 800; color: #ffffff; margin-top: 6px;">
+                    <span class="user-role-badge role-customer" style="margin-bottom: 10px; background: rgba(239, 68, 68, 0.25); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4);">PORTAL BENGKEL & KONSUMEN MOTOR</span>
+                    <h2 style="font-size: 1.5rem; font-weight: 800; color: #ffffff; margin-top: 6px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
                         Selamat Datang, {{ Auth::user()->name }}!
                     </h2>
-                    <p style="color: #94a3b8; font-size: 0.88rem; margin-top: 4px; max-width: 600px;">
-                        Di portal ini Anda dapat menelusuri katalog suku cadang alat berat secara realtime serta memantau riwayat faktur transaksi pembelian Anda.
+                    <p style="color: #cbd5e1; font-size: 0.88rem; margin-top: 4px; max-width: 600px;">
+                        Di portal MotoParts Pro ini Anda dapat menelusuri katalog suku cadang sepeda motor secara realtime dengan foto asli beresolusi tinggi serta memantau riwayat faktur transaksi Anda.
                     </p>
                 </div>
                 <div style="display: flex; gap: 12px;">
                     <a href="{{ route('products.index') }}" class="btn btn-primary">
-                        <i class="fa-solid fa-boxes-stacked"></i> Lihat Katalog Suku Cadang
+                        <i class="fa-solid fa-motorcycle"></i> Lihat Katalog Suku Cadang Motor
                     </a>
                 </div>
             </div>
@@ -198,29 +198,31 @@
     </div>
 </div>
 
-<!-- Valuation & Quick Info Bar -->
-<div class="card" style="margin-bottom: 24px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white;">
-    <div class="card-body" style="padding: 20px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
+<!-- Valuation & Modern Workshop Banner Card -->
+<div class="card" style="margin-bottom: 24px; position: relative; overflow: hidden; background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%), url('{{ asset('images/dashboard_banner.jpg') }}') center/cover no-repeat; color: white; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+    <div class="card-body" style="padding: 24px 28px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; backdrop-filter: blur(4px);">
         <div>
-            <span style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.6px; color: #94a3b8; font-weight: 700;">
-                Total Nilai Valuasi Aset Stok Saat Ini
-            </span>
-            <div class="font-mono" style="font-size: 1.6rem; font-weight: 800; color: #fbbf24; margin-top: 4px;">
+            <div style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 999px; margin-bottom: 8px;">
+                <i class="fa-solid fa-motorcycle text-danger"></i>
+                <span style="font-size: 0.72rem; font-weight: 700; color: #fca5a5; text-transform: uppercase;">Showroom & Gudang MotoParts</span>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 800; color: #ffffff;">Valuasi Aset Suku Cadang Motor</h3>
+            <div class="font-mono" style="font-size: 1.85rem; font-weight: 800; color: #fbbf24; margin-top: 4px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
                 Rp {{ number_format($inventoryAssetValue, 0, ',', '.') }}
             </div>
         </div>
-        <div style="display: flex; gap: 24px; font-size: 0.85rem; color: #cbd5e1;">
-            <div>
-                <i class="fa-solid fa-box text-warning me-1"></i>
-                <strong>{{ $totalProducts }}</strong> SKU Terdaftar
+        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+            <div style="background: rgba(15, 23, 42, 0.75); padding: 12px 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 0.72rem; color: #94a3b8; text-transform: uppercase;">Suku Cadang</div>
+                <div style="font-size: 1.1rem; font-weight: 700; color: #ffffff;"><i class="fa-solid fa-box text-warning me-1"></i> {{ $totalProducts }} SKU</div>
             </div>
-            <div>
-                <i class="fa-solid fa-tags text-info me-1"></i>
-                <strong>{{ $totalCategories }}</strong> Kategori
+            <div style="background: rgba(15, 23, 42, 0.75); padding: 12px 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 0.72rem; color: #94a3b8; text-transform: uppercase;">Kategori</div>
+                <div style="font-size: 1.1rem; font-weight: 700; color: #ffffff;"><i class="fa-solid fa-tags text-info me-1"></i> {{ $totalCategories }} Jenis</div>
             </div>
-            <div>
-                <i class="fa-solid fa-truck text-success me-1"></i>
-                <strong>{{ $totalSuppliers }}</strong> Pemasok Aktif
+            <div style="background: rgba(15, 23, 42, 0.75); padding: 12px 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 0.72rem; color: #94a3b8; text-transform: uppercase;">Pemasok Resmi</div>
+                <div style="font-size: 1.1rem; font-weight: 700; color: #ffffff;"><i class="fa-solid fa-truck text-success me-1"></i> {{ $totalSuppliers }} Mitra</div>
             </div>
         </div>
     </div>
@@ -232,7 +234,7 @@
     <div class="card-header" style="background-color: #fff8f8;">
         <div class="card-title" style="color: #991b1b;">
             <i class="fa-solid fa-triangle-exclamation"></i>
-            Perhatian: Produk Mendekati / Habis Stok
+            Perhatian: Suku Cadang Mendekati / Habis Stok
         </div>
         <a href="{{ route('products.low-stock') }}" class="btn btn-sm btn-outline-danger">
             Lihat Semua ({{ $lowStockCount }})
@@ -242,8 +244,9 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th style="width: 50px;">Foto</th>
                     <th>SKU</th>
-                    <th>Nama Produk</th>
+                    <th>Nama Suku Cadang</th>
                     <th>Kategori</th>
                     <th>Sisa Stok</th>
                     <th>Batas Minimum</th>
@@ -254,8 +257,16 @@
             <tbody>
                 @foreach($lowStockProducts as $prod)
                 <tr>
+                    <td>
+                        <img src="{{ $prod->imageUrl() }}" alt="{{ $prod->name }}" 
+                             style="width: 40px; height: 40px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); background-color: #0f172a;"
+                             onerror="this.src='{{ asset('images/products/placeholder.svg') }}'">
+                    </td>
                     <td class="font-mono"><strong>{{ $prod->sku }}</strong></td>
-                    <td>{{ $prod->name }}</td>
+                    <td>
+                        <strong style="color: #0f172a;">{{ $prod->name }}</strong>
+                        <div style="font-size: 0.72rem; color: #64748b;">{{ $prod->brand ?? '-' }} | Motor: {{ $prod->model_series ?? 'Universal' }}</div>
+                    </td>
                     <td><span class="badge badge-secondary">{{ $prod->category->name ?? '-' }}</span></td>
                     <td>
                         @if($prod->stock <= 0)
@@ -395,26 +406,30 @@
     <div class="card">
         <div class="card-header">
             <div class="card-title">
-                <i class="fa-solid fa-tags text-primary"></i>
-                Kategori Suku Cadang Alat Berat
+                <i class="fa-solid fa-motorcycle text-primary"></i>
+                Kategori Suku Cadang Motor Populer
             </div>
             <a href="{{ route('categories.index') }}" class="btn btn-sm btn-secondary">Lihat Semua</a>
         </div>
         <div class="card-body">
             <p style="font-size: 0.84rem; color: #64748b; margin-bottom: 16px;">
-                Cari komponen spesifik sesuai kebutuhan unit alat berat Anda:
+                Cari komponen spesifik sesuai kebutuhan servis motor Anda:
             </p>
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <a href="{{ route('products.index') }}" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: #f8fafc; border-radius: 8px; text-decoration: none; color: #1e293b; border: 1px solid var(--border);">
-                    <span><i class="fa-solid fa-gear me-2 text-warning"></i> Undercarriage & Tracks</span>
+                    <span><i class="fa-solid fa-gears me-2 text-danger"></i> Transmisi CVT & Drivetrain</span>
                     <i class="fa-solid fa-chevron-right text-muted"></i>
                 </a>
                 <a href="{{ route('products.index') }}" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: #f8fafc; border-radius: 8px; text-decoration: none; color: #1e293b; border: 1px solid var(--border);">
-                    <span><i class="fa-solid fa-oil-well me-2 text-primary"></i> Hydraulic System & Seals</span>
+                    <span><i class="fa-solid fa-circle-dot me-2 text-primary"></i> Sistem Pengereman (Brake Pad / Disc)</span>
                     <i class="fa-solid fa-chevron-right text-muted"></i>
                 </a>
                 <a href="{{ route('products.index') }}" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: #f8fafc; border-radius: 8px; text-decoration: none; color: #1e293b; border: 1px solid var(--border);">
-                    <span><i class="fa-solid fa-fire me-2 text-danger"></i> Engine & Filtration</span>
+                    <span><i class="fa-solid fa-oil-can me-2 text-warning"></i> Oli Mesin 4T & Pelumas Matic</span>
+                    <i class="fa-solid fa-chevron-right text-muted"></i>
+                </a>
+                <a href="{{ route('products.index') }}" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: #f8fafc; border-radius: 8px; text-decoration: none; color: #1e293b; border: 1px solid var(--border);">
+                    <span><i class="fa-solid fa-car-battery me-2 text-info"></i> Kelistrikan & Aki Kering (MF)</span>
                     <i class="fa-solid fa-chevron-right text-muted"></i>
                 </a>
             </div>

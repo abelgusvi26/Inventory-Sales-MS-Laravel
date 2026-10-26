@@ -1,51 +1,54 @@
-# Heavy Equipment Inventory & Sales Management System (Laravel 10)
+# MotoParts Pro - Motorcycle Spare Parts Sales & Inventory Management System (Laravel 10)
 
-Sistem Informasi Manajemen Inventaris dan Transaksi Penjualan terintegrasi untuk bisnis distribusi suku cadang dan armada alat berat (*heavy equipment parts*), dibangun menggunakan **Laravel 10**, **MySQL / MariaDB**, **Eloquent ORM**, serta mengimplementasikan prinsip data integrity dan atomic database transactions.
+Sistem Informasi Manajemen Inventaris dan Transaksi Penjualan Suku Cadang Sepeda Motor (*motorcycle spare parts*) terintegrasi, dibangun menggunakan **Laravel 10**, **MySQL / MariaDB**, **Eloquent ORM**, serta dilengkapi galeri visual gambar produk, kontrol stok otomatis, kasir transaksi, dan validasi data atomic.
 
 ---
 
 ## 🚀 Fitur Utama & Kesesuaian Kebutuhan
 
 1. **Authentication & Role-Based Access Control (RBAC)**:
-   - **Admin / Owner**: Akses penuh ke seluruh modul, manajemen akun pengguna, pembatalan transaksi resmi dengan pemulihan stok otomatis.
-   - **Staff (Gudang & Kasir)**: Input transaksi pembelian (*stock-in*), transaksi penjualan (*stock-out*), melihat katalog dan peringatan stok rendah. Dibatasi dari menu manajemen pengguna dan pembatalan transaksi berisiko.
+   - **Admin / Owner Bengkel & Toko**: Akses penuh ke seluruh modul, manajemen akun pengguna, pembatalan transaksi dengan pemulihan stok otomatis.
+   - **Staff (Kasir & Gudang Sparepart)**: Input kulakan stok (*stock-in*), kasir penjualan (*stock-out*), registrasi suku cadang beserta upload gambar, peringatan stok kritis.
+   - **Pelanggan Bengkel & Retail (Customer)**: Melihat etalase katalog suku cadang motor lengkap dengan gambar, spesifikasi motor yang kompatibel, dan riwayat faktur pesanan.
 
-2. **Master Data Suku Cadang Alat Berat**:
-   - Master Produk (SKU unik, Merek, Seri Kompatibilitas seperti *PC200-8* / *CAT 320D*, Satuan, Harga Beli, Harga Jual, Stok Aktual, Batas Minimum Stok, Lokasi Rak).
-   - Master Kategori Produk & Master Mitra Pemasok (Suppliers).
-   - Dilengkapi *Soft Deletes* dan validasi penghapusan: produk atau pemasok yang sudah terlibat dalam riwayat transaksi dilindungi dari *hard delete*.
+2. **Master Data Suku Cadang Sepeda Motor & Gambar Visual**:
+   - Master Produk Suku Cadang (SKU, Nama Sparepart, Merek OEM/Racing: AHM, YGP, Daytona, RCB, Motul, dsb., Kompatibilitas Motor: Beat, Vario 160, NMAX, Aerox, Scoopy, PCX, CBR150R, Satuan, Harga Beli, Harga Jual, Stok Aktual, Batas Minimum Stok, Lokasi Rak Toko/Gudang).
+   - **Upload & Pratinjau Gambar Produk**: Setiap sparepart memiliki foto visual yang dapat diunggah atau menggunakan ilustrasi grafis SVG bawaan di direktori `public/images/products/`.
+   - Master Kategori Suku Cadang (Transmisi CVT, Pengereman, Mesin & Piston, Oli & Pelumas, Kelistrikan & Aki, Suspensi, Rantai & Ban).
+   - Master Distributor Resmi Suku Cadang Motor (AHM Parts Depot, Yamaha YGP Center, Daytona Racing, dsb).
+   - Dilindungi *Soft Deletes* dan validasi penghapusan: produk dengan riwayat transaksi tidak dapat di-*hard delete*.
 
-3. **Logika Transaksi & Pembaruan Stok Otomatis (*Atomic Transactions*)**:
-   - **Pembelian (*Purchase / Stock-In*)**: Multi-item, perhitungan total dihitung aman oleh server, nomor referensi urut otomatis (`PO-YYYYMMDD-XXXX`), stok bertambah otomatis hanya setelah database transaction berhasil di-*commit*.
-   - **Penjualan (*Sales / Stock-Out*)**: Multi-item, pengecekan ketersediaan stok fisik secara *real-time* di server (`lockForUpdate`). Transaksi ditolak secara tegas apabila stok tidak mencukupi. Stok berkurang otomatis setelah transaksi sukses.
-   - **Pembatalan Transaksi**: Admin dapat membatalkan transaksi dengan pencatatan alasan dan petugas pembatal. Stok otomatis dipulihkan/dikembalikan secara konsisten.
+3. **Logika Transaksi Kasir & Pembaruan Stok Otomatis (*Atomic Transactions*)**:
+   - **Kulakan Stok (*Purchase / Stock-In*)**: Multi-item dari supplier distributor motor, nomor PO otomatis (`PO-YYYYMMDD-XXXX`), stok bertambah otomatis hanya setelah database transaction berhasil di-*commit*.
+   - **Kasir Penjualan (*Sales / Stock-Out*)**: Multi-item, pengecekan ketersediaan stok fisik secara *real-time* di server (`lockForUpdate`). Transaksi ditolak secara tegas apabila kuantitas melebihi stok. Stok berkurang otomatis setelah nota terbit.
+   - **Pembatalan Transaksi**: Admin berwenang membatalkan transaksi yang keliru dengan alasan pembatalan. Stok otomatis dipulihkan/dikembalikan secara akurat.
 
 4. **Dashboard & Laporan Agregat**:
-   - Menghitung omset penjualan hari ini dan bulan ini langsung dari database agregat (`sum()`, `count()`).
-   - Valuasi total nilai aset inventaris fisik gudang (`SUM(stock * purchase_price)`).
-   - Notifikasi & tabel khusus **Peringatan Stok Rendah / Kritis** (*Safety Stock Alert*).
-   - Filter tanggal, pencarian kata kunci, kategori, status transaksi, dan paginasi yang mempertahankan parameter query (`paginate()->withQueryString()`).
+   - Omset penjualan harian dan bulanan langsung dari agregasi database (`sum()`, `count()`).
+   - Valuasi total nilai aset suku cadang di etalase & gudang bengkel (`SUM(stock * purchase_price)`).
+   - Notifikasi & tabel khusus **Peringatan Stok Suku Cadang Kritis** (*Safety Stock Alert*).
+   - Pencarian real-time berdasarkan SKU, nama sparepart, merek atau model motor.
 
 ---
 
 ## 🛠️ Persyaratan Sistem & Arsitektur
 
-- **PHP**: Versi 8.2 atau lebih baru (dengan ekstensi `pdo_mysql`, `mbstring`, `openssl`, `curl`, `zip`)
+- **PHP**: Versi 8.2 atau lebih baru (dengan ekstensi `pdo_mysql`, `mbstring`, `openssl`, `curl`, `zip`, `fileinfo`)
 - **DBMS**: MySQL 5.7+ / MariaDB 10.1+
 - **Composer**: Versi 2.x
 - **Framework**: Laravel 10.x
 - **Arsitektur**:
-  - `routes/web.php`: Routing HTTP dengan pemisahan middleware `guest`, `auth`, dan `role:admin`.
-  - `app/Http/Controllers/`: Pemisahan logika kendali modul (`DashboardController`, `ProductController`, `PurchaseController`, `SaleController`, `CategoryController`, `SupplierController`, `UserController`, `AuthController`).
-  - `app/Models/`: Model Eloquent dengan relasi lengkap dan casting tipe data.
-  - `database/migrations/`: Migrasi terstruktur dengan foreign keys, unique constraint, dan default string length 191 (kompatibel utf8mb4 MariaDB).
+  - `routes/web.php`: Routing HTTP dengan pemisahan middleware `guest`, `auth`, `role:admin,staff`.
+  - `app/Http/Controllers/`: Logika bisnis terisolasi (`ProductController` menangani upload gambar, `PurchaseController`, `SaleController`, dsb).
+  - `app/Models/`: Model Eloquent dengan method helper `imageUrl()` dan relasi database lengkap.
+  - `public/images/products/`: Aset visual suku cadang sepeda motor (CVT, Brake Pad, Piston Kit, Aki MF, Oli 4T, Shockbreaker, Gear Set, Ban).
 
 ---
 
 ## 📥 Panduan Instalasi & Menjalankan Aplikasi
 
 ### 1. Konfigurasi Lingkungan (`.env`) & Pastikan MySQL Berjalan
-- Buka **XAMPP Control Panel** lalu klik **Start** pada modul **MySQL** (atau jalankan `C:\xampp\mysql_start.bat`).
+- Buka **XAMPP Control Panel** lalu klik **Start** pada modul **MySQL**.
 - Konfigurasi database default pada file [`.env`](file:///d:/Sistem%20Informasi/Semester%203/Pemrograman%20Web/Inventory_Sales_MS_Laravel/.env):
 ```ini
 DB_CONNECTION=mysql
@@ -56,13 +59,18 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-### 2. Jalankan Migrasi & Seeder
-Jalankan perintah berikut untuk membuat seluruh tabel dan mengisi data awal (kategori, supplier, suku cadang alat berat, dan akun pengguna):
+### 2. Jalankan Migrasi & Seeder Suku Cadang Motor
+Jalankan perintah berikut untuk membuat seluruh tabel dan mengisi data awal suku cadang sepeda motor:
 ```bash
 php artisan migrate:fresh --seed
 ```
 
-### 3. Jalankan Server Lokal
+### 3. Buat Symlink Storage (Jika Belum Terhubung)
+```bash
+php artisan storage:link
+```
+
+### 4. Jalankan Server Lokal
 ```bash
 php artisan serve
 ```
@@ -74,11 +82,11 @@ Aplikasi dapat diakses melalui browser pada alamat: **`http://127.0.0.1:8000`**
 
 | Role | Username | Password | Keterangan |
 | :--- | :--- | :--- | :--- |
-| **Admin / Owner** | `admin` | `admin123` | Akses penuh, manajemen pengguna, pembatalan transaksi |
-| **Staff Gudang & Kasir** | `staff1` | `staff123` | Transaksi pembelian, penjualan, katalog produk |
-| **Staff Operasional** | `staff2` | `staff123` | Transaksi pembelian dan penjualan |
-| **Customer / Pembeli** | `customer1` | `customer123` | Portal katalog suku cadang, pantau riwayat faktur pribadi |
-| **Customer / Pembeli** | `customer2` | `customer123` | Akun pembeli perusahaan / kontraktor alat berat |
+| **Admin / Owner Toko** | `admin` | `admin123` | Akses penuh, manajemen user, pembatalan transaksi |
+| **Kasir & Staff Gudang** | `staff1` | `staff123` | Transaksi kulakan, kasir penjualan, katalog suku cadang |
+| **Mekanik / Frontdesk** | `staff2` | `staff123` | Transaksi pembelian dan penjualan sparepart |
+| **Pelanggan Bengkel Motor** | `customer1` | `customer123` | Bengkel Motor Berkah Jaya (pembelian rutin) |
+| **Komunitas Motor** | `customer2` | `customer123` | Komunitas Matic Speed Club |
 
 ---
 
@@ -88,7 +96,7 @@ Telah disediakan suite pengujian otomatis (`InventorySalesBusinessRulesTest`) ya
 - Pengalihan otentikasi (guest redirect).
 - Hak akses staff vs admin (RBAC 403 authorization).
 - Penambahan stok otomatis saat pembelian sukses.
-- Pengurangan stok otomatis saat penjualan berhasil.
+- Pengurangan stok otomatis saat penjualan kasir berhasil.
 - Penolakan transaksi penjualan jika stok tidak mencukupi (rollback).
 - Pembatalan transaksi dan pemulihan stok kembali ke gudang oleh Admin.
 
@@ -99,6 +107,20 @@ php artisan test --filter=InventorySalesBusinessRulesTest
 
 ---
 
-## 📂 Struktur Dokumen Tambahan
+## 📁 Struktur Direktori Visual Produk
 
-- **[ERD.md](file:///d:/Sistem%20Informasi/Semester%203/Pemrograman%20Web/Inventory_Sales_MS_Laravel/ERD.md)**: Diagram Entity Relationship, struktur relasi tabel, tipe data, dan aturan kunci constraint.
+```
+public/
+└── images/
+    └── products/
+        ├── placeholder.svg     # Gambar default jika produk belum memiliki foto
+        ├── vbelt_cvt.svg       # Ilustrasi V-Belt & Roller CVT
+        ├── brake_pad.svg       # Ilustrasi Kampas & Disc Brake
+        ├── piston_kit.svg      # Ilustrasi Piston Kit & Ring Seher
+        ├── oli_mesin.svg       # Ilustrasi Botol Oli Mesin Motul/AHM
+        ├── aki_motor.svg       # Ilustrasi Aki Kering Maintenance Free
+        ├── shockbreaker.svg    # Ilustrasi Shockbreaker Tabung RCB
+        ├── gear_set.svg        # Ilustrasi Sprocket Gear & Rantai SSS Gold
+        ├── ban_motor.svg       # Ilustrasi Ban Tubeless Soft Compound
+        └── lampu_led.svg       # Ilustrasi Lampu Depan Biled Projector
+```

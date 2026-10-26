@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_tire" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181b"/>
+      <stop offset="100%" stop-color="#27272a"/>
+    </linearGradient>
+    <linearGradient id="rubber" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#09090b"/>
+      <stop offset="50%" stop-color="#27272a"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg_tire)"/>
+
+  <!-- Motorcycle Tire Perspective -->
+  <g transform="translate(200, 125)">
+    <!-- Outer Tire Ellipse -->
+    <ellipse cx="0" cy="0" rx="90" ry="70" fill="url(#rubber)" stroke="#52525b" stroke-width="6"/>
+    
+    <!-- Tread grooves -->
+    <path d="M -60 -40 Q -40 -20 -60 0" stroke="#f43f5e" stroke-width="3" fill="none"/>
+    <path d="M 60 -40 Q 40 -20 60 0" stroke="#f43f5e" stroke-width="3" fill="none"/>
+    <path d="M -70 10 Q -50 30 -70 50" stroke="#f43f5e" stroke-width="3" fill="none"/>
+    <path d="M 70 10 Q 50 30 70 50" stroke="#f43f5e" stroke-width="3" fill="none"/>
+    <path d="M -30 -55 Q 0 -45 30 -55" stroke="#71717a" stroke-width="2.5" fill="none"/>
+    <path d="M -30 55 Q 0 45 30 55" stroke="#71717a" stroke-width="2.5" fill="none"/>
+
+    <!-- Inner Rim Hole -->
+    <ellipse cx="0" cy="0" rx="55" ry="42" fill="#18181b" stroke="#71717a" stroke-width="4"/>
+    
+    <!-- Cast Wheel Spokes (Enkei style) -->
+    <ellipse cx="0" cy="0" rx="22" ry="16" fill="#3f3f46" stroke="#fbbf24" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="7" fill="#09090b"/>
+    <line x1="-50" y1="0" x2="-22" y2="0" stroke="#fbbf24" stroke-width="3"/>
+    <line x1="22" y1="0" x2="50" y2="0" stroke="#fbbf24" stroke-width="3"/>
+    <line x1="0" y1="-38" x2="0" y2="-16" stroke="#fbbf24" stroke-width="3"/>
+    <line x1="0" y1="16" x2="0" y2="38" stroke="#fbbf24" stroke-width="3"/>
+  </g>
+
+  <!-- Badge / Tag -->
+  <rect x="25" y="25" width="125" height="26" rx="6" fill="#475569"/>
+  <text x="87" y="42" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="11" font-weight="800" fill="#ffffff" text-anchor="middle">BAN TUBELESS</text>
+
+  <!-- Title -->
+  <text x="200" y="240" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="17" font-weight="800" fill="#ffffff" text-anchor="middle">Ban Luar Tubeless Soft Compound 90/80-14</text>
+  <text x="200" y="265" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="12" font-weight="600" fill="#38bdf8" text-anchor="middle">Maxxis Victra / FDR Sport Zevo Matic</text>
+</svg>

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Peringatan Stok Rendah')
-@section('page_title', 'Daftar Produk Stok Kritis / Rendah')
+@section('title', 'Peringatan Stok Suku Cadang Kritis')
+@section('page_title', 'Suku Cadang Perlu Restock Segera')
 
 @section('topbar_actions')
     <a href="{{ route('purchases.create') }}" class="btn btn-sm btn-primary">
-        <i class="fa-solid fa-cart-plus"></i> Buat Pesanan Pembelian (PO)
+        <i class="fa-solid fa-cart-plus"></i> Buat Pesanan Kulakan (PO)
     </a>
     <a href="{{ route('products.index') }}" class="btn btn-sm btn-secondary">
         <i class="fa-solid fa-arrow-left"></i> Kembali ke Katalog
@@ -16,29 +16,30 @@
 <div class="alert alert-warning">
     <i class="fa-solid fa-triangle-exclamation fa-lg"></i>
     <div>
-        <strong>Pemberitahuan Sistem:</strong> Daftar di bawah ini memuat produk yang stok fisiknya sudah mencapai atau berada di bawah batas minimum (safety stock). Segera buat <em>Purchase Order</em> ke supplier terkait untuk mencegah kekosongan stok operasional.
+        <strong>Pemberitahuan Stok Bengkel & Toko:</strong> Daftar di bawah ini memuat suku cadang sepeda motor yang stok fisiknya sudah mencapai atau berada di bawah batas minimum (*safety stock*). Segera order ke distributor resmi (AHM/YGP/Daytona/RCB) untuk mencegah kekosongan stok saat melayani konsumen bengkel.
     </div>
 </div>
 
 <div class="card">
     <div class="card-header">
         <div class="card-title" style="color: #b45309;">
-            <i class="fa-solid fa-boxes-packing"></i>
-            Produk Perlu Restock ({{ $products->total() }})
+            <i class="fa-solid fa-motorcycle"></i>
+            Suku Cadang Motor Kritis ({{ $products->total() }})
         </div>
     </div>
     <div class="table-responsive">
         <table class="table">
             <thead>
                 <tr>
+                    <th style="width: 60px;">Foto</th>
                     <th>SKU</th>
-                    <th>Nama & Spesifikasi</th>
+                    <th>Nama Suku Cadang & Motor</th>
                     <th>Kategori</th>
-                    <th>Sisa Stok Saat Ini</th>
-                    <th>Batas Minimum (Reorder)</th>
+                    <th>Sisa Stok</th>
+                    <th>Batas Minimum</th>
                     <th>Defisit Kebutuhan</th>
                     <th>Lokasi Rak</th>
-                    <th style="text-align: right;">Aksi Cepat</th>
+                    <th style="text-align: right;">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,11 +48,16 @@
                     $deficit = max(0, $product->min_stock - $product->stock);
                 @endphp
                 <tr>
+                    <td>
+                        <img src="{{ $product->imageUrl() }}" alt="{{ $product->name }}" 
+                             style="width: 48px; height: 48px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); background-color: #0f172a;"
+                             onerror="this.src='{{ asset('images/products/placeholder.svg') }}'">
+                    </td>
                     <td class="font-mono"><strong>{{ $product->sku }}</strong></td>
                     <td>
                         <strong style="color: #0f172a;">{{ $product->name }}</strong>
                         <div style="font-size: 0.75rem; color: #64748b;">
-                            {{ $product->brand ?? '-' }} | Seri: {{ $product->model_series ?? '-' }}
+                            {{ $product->brand ?? '-' }} | Motor: <span class="badge badge-secondary" style="font-size: 0.7rem;">{{ $product->model_series ?? 'Universal' }}</span>
                         </div>
                     </td>
                     <td><span class="badge badge-secondary">{{ $product->category->name ?? '-' }}</span></td>
@@ -68,21 +74,21 @@
                             +{{ $deficit }} {{ $product->unit }}
                         </span>
                     </td>
-                    <td>{{ $product->location ?? 'Gudang Utama' }}</td>
+                    <td>{{ $product->location ?? 'Etalase Toko' }}</td>
                     <td style="text-align: right;">
-                        <a href="{{ route('purchases.create') }}" class="btn btn-sm btn-primary">
+                        <a href="{{ route('purchases.create') }}" class="btn btn-sm btn-primary" title="Beli Stok">
                             <i class="fa-solid fa-cart-plus"></i> Restock
                         </a>
-                        <a href="{{ route('products.show', $product) }}" class="btn btn-sm btn-secondary">
+                        <a href="{{ route('products.show', $product) }}" class="btn btn-sm btn-secondary" title="Lihat Detail">
                             <i class="fa-regular fa-eye"></i>
                         </a>
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="8" style="text-align: center; padding: 40px; color: var(--text-muted);">
+                    <td colspan="9" style="text-align: center; padding: 40px; color: var(--text-muted);">
                         <i class="fa-solid fa-circle-check fa-2x" style="color: var(--success); margin-bottom: 8px; display: block;"></i>
-                        Semua stok produk saat ini dalam batas aman! Tidak ada stok kritis.
+                        Semua suku cadang motor saat ini dalam batas aman! Tidak ada stok kritis.
                     </td>
                 </tr>
                 @endforelse

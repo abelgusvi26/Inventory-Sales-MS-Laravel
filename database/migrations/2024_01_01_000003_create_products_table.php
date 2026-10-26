@@ -16,15 +16,16 @@ return new class extends Migration
             $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->string('sku')->unique();
             $table->string('name');
-            $table->string('brand')->nullable(); // e.g., Caterpillar, Komatsu, Volvo, Hitachi
-            $table->string('model_series')->nullable(); // e.g., PC200-8, CAT320D
-            $table->string('unit')->default('pcs'); // unit: pcs, set, unit, drum, roll
+            $table->string('brand')->nullable(); // e.g., Honda Genuine Parts (AHM), Yamaha Genuine Parts (YGP), Suzuki, Kawasaki, Daytona, RCB
+            $table->string('model_series')->nullable(); // e.g., Beat, Vario 160, NMAX, Aerox, Scoopy, PCX, CBR150R
+            $table->string('unit')->default('pcs'); // unit: pcs, set, unit, botol, pasang
             $table->decimal('purchase_price', 15, 2)->default(0);
             $table->decimal('selling_price', 15, 2)->default(0);
             $table->integer('stock')->default(0);
             $table->integer('min_stock')->default(5); // threshold for low stock alert
             $table->string('location')->nullable(); // warehouse bin/rack
             $table->text('description')->nullable();
+            $table->string('image')->nullable(); // path ke file gambar produk
             $table->timestamps();
             $table->softDeletes();
         });

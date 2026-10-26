@@ -92,7 +92,7 @@
 
             <div class="form-group">
                 <label class="form-label" for="notes">Catatan Pembelian (Opsional)</label>
-                <textarea id="notes" name="notes" rows="2" class="form-control" placeholder="Nomor surat jalan, ekspedisi armada, catatan kondisi barang...">{{ old('notes') }}</textarea>
+                <textarea id="notes" name="notes" rows="2" class="form-control" placeholder="Nomor surat jalan resmi AHM/YGP, kurir cargo logistik, kondisi kemasan sparepart...">{{ old('notes') }}</textarea>
             </div>
 
             <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px; border-top: 1px solid var(--border); padding-top: 20px;">

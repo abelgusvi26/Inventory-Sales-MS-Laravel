@@ -41,7 +41,7 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                 <div class="form-group">
                     <label class="form-label" for="email">Alamat Email <span class="required">*</span></label>
-                    <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="user@heavyequip.local" required>
+                    <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="user@motoparts.local" required>
                     @error('email')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

@@ -21,7 +21,7 @@
             @csrf
             <div class="form-group">
                 <label class="form-label" for="code">Kode Kategori <span class="required">*</span></label>
-                <input type="text" id="code" name="code" class="form-control font-mono @error('code') is-invalid @enderror" value="{{ old('code') }}" placeholder="Contoh: CAT-HYD" required>
+                <input type="text" id="code" name="code" class="form-control font-mono @error('code') is-invalid @enderror" value="{{ old('code') }}" placeholder="Contoh: CAT-CVT" required>
                 @error('code')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -29,7 +29,7 @@
 
             <div class="form-group">
                 <label class="form-label" for="name">Nama Kategori <span class="required">*</span></label>
-                <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Contoh: Hydraulic System & Seals" required>
+                <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Contoh: Transmisi CVT & Drivetrain" required>
                 @error('name')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

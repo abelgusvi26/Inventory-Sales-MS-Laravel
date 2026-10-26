@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
@@ -38,7 +39,7 @@ class ProductController extends Controller
                 return $query->whereColumn('stock', '>', 'min_stock');
             })
             ->latest('id')
-            ->paginate(10)
+            ->paginate(12)
             ->withQueryString();
 
         $categories = Category::orderBy('name')->get();
@@ -78,6 +79,7 @@ class ProductController extends Controller
             'min_stock' => ['required', 'integer', 'min:0'],
             'location' => ['nullable', 'string', 'max:100'],
             'description' => ['nullable', 'string', 'max:1000'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg', 'max:2048'],
         ], [
             'sku.required' => 'SKU produk wajib diisi.',
             'sku.unique' => 'SKU sudah digunakan oleh produk lain.',
@@ -86,7 +88,14 @@ class ProductController extends Controller
             'selling_price.min' => 'Harga jual tidak boleh negatif.',
             'stock.min' => 'Stok awal tidak boleh bernilai negatif.',
             'min_stock.min' => 'Batas minimum stok tidak boleh negatif.',
+            'image.image' => 'File harus berupa gambar.',
+            'image.max' => 'Ukuran gambar maksimal 2MB.',
         ]);
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('products', 'public');
+            $validated['image'] = $path;
+        }
 
         $product = Product::create($validated);
 
@@ -135,11 +144,23 @@ class ProductController extends Controller
             'min_stock' => ['required', 'integer', 'min:0'],
             'location' => ['nullable', 'string', 'max:100'],
             'description' => ['nullable', 'string', 'max:1000'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg', 'max:2048'],
         ], [
             'sku.required' => 'SKU produk wajib diisi.',
             'sku.unique' => 'SKU sudah digunakan oleh produk lain.',
             'name.required' => 'Nama produk wajib diisi.',
+            'image.image' => 'File harus berupa gambar.',
+            'image.max' => 'Ukuran gambar maksimal 2MB.',
         ]);
+
+        if ($request->hasFile('image')) {
+            // Hapus gambar lama jika tersimpan di disk public
+            if ($product->image && Storage::disk('public')->exists($product->image)) {
+                Storage::disk('public')->delete($product->image);
+            }
+            $path = $request->file('image')->store('products', 'public');
+            $validated['image'] = $path;
+        }
 
         // Note: Stock is modified exclusively via purchase stock-in or sale stock-out/cancellation!
         $product->update($validated);

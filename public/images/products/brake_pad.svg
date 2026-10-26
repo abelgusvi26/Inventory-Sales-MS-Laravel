@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_disc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181b"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="50%" stop-color="#94a3b8"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg_disc)"/>
+
+  <!-- Disc Brake Rotor -->
+  <g transform="translate(150, 130)">
+    <!-- Outer Rotor -->
+    <circle cx="0" cy="0" r="68" fill="none" stroke="url(#metal)" stroke-width="22"/>
+    <!-- Holes on rotor -->
+    <circle cx="0" cy="-58" r="3.5" fill="#18181b"/>
+    <circle cx="41" cy="-41" r="3.5" fill="#18181b"/>
+    <circle cx="58" cy="0" r="3.5" fill="#18181b"/>
+    <circle cx="41" cy="41" r="3.5" fill="#18181b"/>
+    <circle cx="0" cy="58" r="3.5" fill="#18181b"/>
+    <circle cx="-41" cy="41" r="3.5" fill="#18181b"/>
+    <circle cx="-58" cy="0" r="3.5" fill="#18181b"/>
+    <circle cx="-41" cy="-41" r="3.5" fill="#18181b"/>
+
+    <!-- Inner Carrier Gold -->
+    <circle cx="0" cy="0" r="42" fill="#d97706" stroke="#b45309" stroke-width="2"/>
+    <circle cx="0" cy="0" r="22" fill="#18181b"/>
+    <!-- Floating pins -->
+    <circle cx="0" cy="-42" r="5" fill="#e2e8f0"/>
+    <circle cx="36" cy="-21" r="5" fill="#e2e8f0"/>
+    <circle cx="36" cy="21" r="5" fill="#e2e8f0"/>
+    <circle cx="0" cy="42" r="5" fill="#e2e8f0"/>
+    <circle cx="-36" cy="21" r="5" fill="#e2e8f0"/>
+    <circle cx="-36" cy="-21" r="5" fill="#e2e8f0"/>
+  </g>
+
+  <!-- Brake Pads Pair -->
+  <g transform="translate(275, 115)">
+    <!-- Pad 1 -->
+    <rect x="-35" y="-30" width="60" height="36" rx="6" fill="#dc2626" stroke="#b91c1c" stroke-width="2"/>
+    <rect x="-30" y="-12" width="50" height="14" rx="2" fill="#475569"/>
+    <!-- Pad 2 -->
+    <rect x="-25" y="15" width="60" height="36" rx="6" fill="#dc2626" stroke="#b91c1c" stroke-width="2"/>
+    <rect x="-20" y="33" width="50" height="14" rx="2" fill="#475569"/>
+    <!-- Pin holes -->
+    <circle cx="-25" cy="-20" r="4" fill="#ffffff"/>
+    <circle cx="15" cy="-20" r="4" fill="#ffffff"/>
+    <circle cx="-15" cy="25" r="4" fill="#ffffff"/>
+    <circle cx="25" cy="25" r="4" fill="#ffffff"/>
+  </g>
+
+  <!-- Badge / Tag -->
+  <rect x="25" y="25" width="135" height="26" rx="6" fill="#0284c7"/>
+  <text x="92" y="42" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="11" font-weight="800" fill="#ffffff" text-anchor="middle">SISTEM PENGEREMAN</text>
+
+  <!-- Title -->
+  <text x="200" y="240" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="17" font-weight="800" fill="#ffffff" text-anchor="middle">Kampas Rem Cakram Depan (Brake Pad)</text>
+  <text x="200" y="265" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="12" font-weight="600" fill="#38bdf8" text-anchor="middle">Nissin / Daytona Ultra Force Series</text>
+</svg>

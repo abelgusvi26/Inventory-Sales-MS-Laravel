@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - HeavyEquip Inventory & Sales Management</title>
+    <title>Login - MotoParts Pro (Sistem Penjualan Suku Cadang Motor)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --primary: #f59e0b;
-            --primary-dark: #d97706;
+            --primary: #ef4444;
+            --primary-dark: #dc2626;
             --dark-slate: #0f172a;
             --card-dark: #1e293b;
         }
@@ -47,15 +47,15 @@
         .brand-badge {
             width: 56px;
             height: 56px;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
             border-radius: 14px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             font-size: 1.6rem;
-            color: #0f172a;
+            color: #ffffff;
             margin-bottom: 16px;
-            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
         }
         .login-header h1 {
             font-size: 1.45rem;
@@ -168,10 +168,10 @@
     <div class="login-card">
         <div class="login-header">
             <div class="brand-badge">
-                <i class="fa-solid fa-truck-monster"></i>
+                <i class="fa-solid fa-motorcycle"></i>
             </div>
-            <h1>HEAVY EQUIP</h1>
-            <p>Sistem Informasi Inventaris & Penjualan</p>
+            <h1>MOTOPARTS PRO</h1>
+            <p>Sistem Informasi Penjualan Suku Cadang Motor</p>
         </div>
 
         @if(session('error'))

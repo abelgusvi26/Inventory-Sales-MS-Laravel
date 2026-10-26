@@ -17,16 +17,16 @@ use Carbon\Carbon;
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Seed the application's database with motorcycle spare parts data.
      */
     public function run(): void
     {
-        // 1. Seed Users (Owner/Admin and Staff)
+        // 1. Seed Users (Owner/Admin, Staff Kasir, dan Pelanggan Bengkel/Retail)
         $admin = User::firstOrCreate(
             ['username' => 'admin'],
             [
-                'name' => 'Owner / Admin Utama',
-                'email' => 'admin@heavyequip.local',
+                'name' => 'Owner / Admin Toko',
+                'email' => 'admin@motoparts.local',
                 'password' => Hash::make('admin123'),
                 'role' => 'admin',
                 'phone' => '081234567890',
@@ -37,8 +37,8 @@ class DatabaseSeeder extends Seeder
         $staff1 = User::firstOrCreate(
             ['username' => 'staff1'],
             [
-                'name' => 'Budi Santoso (Staff Gudang & Kasir)',
-                'email' => 'staff1@heavyequip.local',
+                'name' => 'Budi Pratama (Kasir & Staff Gudang)',
+                'email' => 'staff1@motoparts.local',
                 'password' => Hash::make('staff123'),
                 'role' => 'staff',
                 'phone' => '081298765432',
@@ -49,8 +49,8 @@ class DatabaseSeeder extends Seeder
         $staff2 = User::firstOrCreate(
             ['username' => 'staff2'],
             [
-                'name' => 'Siti Rahma (Staff Operasional)',
-                'email' => 'staff2@heavyequip.local',
+                'name' => 'Siti Nurhaliza (Mekanik & Frontdesk)',
+                'email' => 'staff2@motoparts.local',
                 'password' => Hash::make('staff123'),
                 'role' => 'staff',
                 'phone' => '081377889900',
@@ -61,8 +61,8 @@ class DatabaseSeeder extends Seeder
         $customer1 = User::firstOrCreate(
             ['username' => 'customer1'],
             [
-                'name' => 'CV Mandiri Tambang Abadi',
-                'email' => 'mandiri.tambang@client.local',
+                'name' => 'Bengkel Motor Berkah Jaya',
+                'email' => 'bengkel.berkah@client.local',
                 'password' => Hash::make('customer123'),
                 'role' => 'customer',
                 'phone' => '081122334455',
@@ -73,8 +73,8 @@ class DatabaseSeeder extends Seeder
         $customer2 = User::firstOrCreate(
             ['username' => 'customer2'],
             [
-                'name' => 'PT Nusantara Karya Perkasa',
-                'email' => 'procurement@nusantarakarya.co.id',
+                'name' => 'Komunitas Matic Speed Club',
+                'email' => 'speedclub@client.local',
                 'password' => Hash::make('customer123'),
                 'role' => 'customer',
                 'phone' => '081288990011',
@@ -82,253 +82,286 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // 2. Seed Categories for Heavy Equipment Business
-        $catUndercarriage = Category::firstOrCreate(
-            ['code' => 'CAT-UND'],
+        // 2. Seed Categories for Motorcycle Spare Parts
+        $catCVT = Category::firstOrCreate(
+            ['code' => 'CAT-CVT'],
             [
-                'name' => 'Undercarriage & Tracks',
-                'description' => 'Komponen kaki-kaki: track link, track roller, idler, sprocket untuk excavator & bulldozer',
+                'name' => 'Transmisi CVT & Drivetrain',
+                'description' => 'V-Belt, roller transmisi, per cvt, mangkok ganda, kampas ganda untuk motor matic',
             ]
         );
 
-        $catHydraulic = Category::firstOrCreate(
-            ['code' => 'CAT-HYD'],
+        $catBrake = Category::firstOrCreate(
+            ['code' => 'CAT-BRK'],
             [
-                'name' => 'Hydraulic System & Seals',
-                'description' => 'Main pump, hydraulic cylinder, control valve, seal kit & hoses',
+                'name' => 'Sistem Pengereman (Brake)',
+                'description' => 'Kampas rem tromol & cakram (brake pad), piringan disc brake, master rem, selang rem',
             ]
         );
 
         $catEngine = Category::firstOrCreate(
             ['code' => 'CAT-ENG'],
             [
-                'name' => 'Engine & Filtration',
-                'description' => 'Sparepart mesin diesel alat berat, turbocharger, filter oli, fuel filter & water separator',
+                'name' => 'Mesin & Piston Kit',
+                'description' => 'Piston set, ring seher, klep mesin, noken as/camshaft, rantai keteng & paking blok',
             ]
         );
 
-        $catGET = Category::firstOrCreate(
-            ['code' => 'CAT-GET'],
+        $catOil = Category::firstOrCreate(
+            ['code' => 'CAT-OIL'],
             [
-                'name' => 'Ground Engaging Tools (G.E.T)',
-                'description' => 'Bucket teeth, cutting edge, side cutter, ripper shank',
+                'name' => 'Oli & Pelumas Mesin',
+                'description' => 'Oli mesin 4T, oli gardan matic, cairan radiator coolant, minyak rem & pelumas rantai',
             ]
         );
 
-        $catElectrical = Category::firstOrCreate(
+        $catElec = Category::firstOrCreate(
             ['code' => 'CAT-ELC'],
             [
-                'name' => 'Electrical & Sensors',
-                'description' => 'Starting motor, alternator, solenoid valve, wiring harness & pressure sensor',
+                'name' => 'Kelistrikan & Penerangan',
+                'description' => 'Aki kering/basah (battery MF), busi iridium, lampu LED biled, relay flasher, cdi/ecu',
             ]
         );
 
-        // 3. Seed Suppliers (Distributor Resmi Alat Berat)
-        $sup1 = Supplier::firstOrCreate(
-            ['code' => 'SUP-TRAK'],
+        $catChassis = Category::firstOrCreate(
+            ['code' => 'CAT-SUS'],
             [
-                'name' => 'PT Trakindo Utama Partindo',
-                'company_name' => 'PT Trakindo Utama Heavy Spares',
-                'email' => 'sales@trakindopartindo.com',
-                'phone' => '021-7890123',
-                'address' => 'Kawasan Industri Cikarang Blok B-12, Bekasi',
+                'name' => 'Suspensi, Rantai & Ban',
+                'description' => 'Shockbreaker belakang/depan, gear set rantai roda, ban luar/dalam tubeless',
+            ]
+        );
+
+        // 3. Seed Suppliers (Distributor Resmi Suku Cadang Motor)
+        $sup1 = Supplier::firstOrCreate(
+            ['code' => 'SUP-AHM'],
+            [
+                'name' => 'PT Astra Honda Motor Parts Depot',
+                'company_name' => 'Distributor Resmi Honda Genuine Parts (AHM)',
+                'email' => 'parts@ahm-distribution.co.id',
+                'phone' => '021-6518080',
+                'address' => 'Kawasan Industri Pulogadung Jl. Raya Bekasi Km 20, Jakarta Timur',
             ]
         );
 
         $sup2 = Supplier::firstOrCreate(
-            ['code' => 'SUP-UT'],
+            ['code' => 'SUP-YGP'],
             [
-                'name' => 'PT United Tractors Parts Supply',
-                'company_name' => 'United Tractors Genuine Parts Division',
-                'email' => 'contact@utpartsupply.co.id',
-                'phone' => '021-4605980',
-                'address' => 'Jl. Raya Bekasi Km 22, Cakung, Jakarta Timur',
+                'name' => 'PT Yamaha Indonesia Motor Parts Supply',
+                'company_name' => 'Yamaha Genuine Parts (YGP) Center',
+                'email' => 'spareparts@yamaha-motor.co.id',
+                'phone' => '021-4607880',
+                'address' => 'Jl. Dr. KRT Radjiman Widyodiningrat, Pulo Jahe, Jakarta Timur',
             ]
         );
 
         $sup3 = Supplier::firstOrCreate(
-            ['code' => 'SUP-HEX'],
+            ['code' => 'SUP-DAY'],
             [
-                'name' => 'PT Hexindo Heavy Spares',
-                'company_name' => 'Hexindo Adiperkasa Parts Depot',
-                'email' => 'supply@hexindospares.co.id',
-                'phone' => '021-8765432',
-                'address' => 'Pulo Gadung Industrial Estate Kav. 9, Jakarta Timur',
+                'name' => 'PT Daytona Racing Distribution',
+                'company_name' => 'Daytona Racing Performance Parts',
+                'email' => 'sales@daytonaracing.id',
+                'phone' => '021-8972341',
+                'address' => 'Kawasan Industri Delta Silicon Lippo Cikarang, Bekasi',
             ]
         );
 
         $sup4 = Supplier::firstOrCreate(
-            ['code' => 'SUP-KOM'],
+            ['code' => 'SUP-RCBOT'],
             [
-                'name' => 'PT Komatsu Undercarriage Asia',
-                'company_name' => 'Komatsu Asia Supply Center',
-                'email' => 'asia.parts@komatsugroup.com',
-                'phone' => '021-5544332',
-                'address' => 'Kawasan MM2100 Cibitung, Cikarang Barat',
+                'name' => 'PT Enwan Multi Partindo (RCB & Proliner)',
+                'company_name' => 'Racing Boy (RCB) Indonesia Official',
+                'email' => 'order@enwan-rcb.co.id',
+                'phone' => '021-5967000',
+                'address' => 'Kawasan Industri Jatake, Tangerang, Banten',
             ]
         );
 
-        // 4. Seed Products with Heavy Equipment Specifications
+        // 4. Seed Motorcycle Spare Parts Products With Images
         $productsData = [
             [
-                'category_id' => $catGET->id,
-                'sku' => 'GET-BT-PC200',
-                'name' => 'Bucket Tooth PC200 Tiger Type (205-70-19570)',
-                'brand' => 'Komatsu OEM',
-                'model_series' => 'PC200-7 / PC200-8',
+                'category_id' => $catCVT->id,
+                'sku' => 'CVT-VBLT-BEAT',
+                'name' => 'V-Belt & Roller Set Honda Beat FI / ESP (23100-K44-V01)',
+                'brand' => 'Honda Genuine Parts (AHM)',
+                'model_series' => 'Beat FI / ESP / Street / Scoopy ESP',
+                'unit' => 'set',
+                'purchase_price' => 95000,
+                'selling_price' => 145000,
+                'stock' => 35,
+                'min_stock' => 10,
+                'location' => 'Rak A-01 (CVT Matic)',
+                'description' => 'Paket sabuk transmisi V-Belt dan roller standar original AHM untuk motor matic Honda 110cc',
+                'image' => 'images/products/vbelt_cvt.jpg',
+            ],
+            [
+                'category_id' => $catCVT->id,
+                'sku' => 'CVT-VBLT-NMAX',
+                'name' => 'V-Belt Kit Yamaha NMAX 155 / Aerox 155 (B65-E7641-00)',
+                'brand' => 'Yamaha Genuine Parts (YGP)',
+                'model_series' => 'NMAX 155 New/Old / Aerox 155 / Lexi',
                 'unit' => 'pcs',
-                'purchase_price' => 240000,
-                'selling_price' => 350000,
+                'purchase_price' => 110000,
+                'selling_price' => 165000,
+                'stock' => 28,
+                'min_stock' => 8,
+                'location' => 'Rak A-02 (CVT Maxi)',
+                'description' => 'V-Belt original kevlar Yamaha untuk lini Maxi Scooter 155cc tahan panas dan putaran tinggi',
+                'image' => 'images/products/vbelt_cvt.jpg',
+            ],
+            [
+                'category_id' => $catBrake->id,
+                'sku' => 'BRK-PAD-FR01',
+                'name' => 'Kampas Rem Cakram Depan Daytona Ultra Force (Lapisan Keramik)',
+                'brand' => 'Daytona Racing',
+                'model_series' => 'Vario 125/150/160, Beat FI, Scoopy, PCX',
+                'unit' => 'set',
+                'purchase_price' => 45000,
+                'selling_price' => 75000,
+                'stock' => 4, // low stock!
+                'min_stock' => 12,
+                'location' => 'Rak B-01 (Brake Pad)',
+                'description' => 'Brake pad non-asbestos keramik Daytona, daya cengkeram pakem, tidak berisik dan awet terhadap disc brake',
+                'image' => 'images/products/brake_pad.jpg',
+            ],
+            [
+                'category_id' => $catBrake->id,
+                'sku' => 'BRK-DISC-RCB',
+                'name' => 'Piringan Cakram Floating Disc RCB S-Series 260mm Gold',
+                'brand' => 'Racing Boy (RCB)',
+                'model_series' => 'Beat / Vario 125 / Scoopy / Mio',
+                'unit' => 'pcs',
+                'purchase_price' => 280000,
+                'selling_price' => 395000,
+                'stock' => 12,
+                'min_stock' => 5,
+                'location' => 'Rak B-03 (Piringan Cakram)',
+                'description' => 'Floating disc brake kompetisi diameter 260mm berbahan stainless steel jepang dengan carrier aluminium alloy',
+                'image' => 'images/products/brake_pad.jpg',
+            ],
+            [
+                'category_id' => $catEngine->id,
+                'sku' => 'ENG-PST-VAR160',
+                'name' => 'Piston Kit Set Standar Honda Vario 160 / PCX 160 (13101-K0S-V00)',
+                'brand' => 'Honda Genuine Parts (AHM)',
+                'model_series' => 'Vario 160 ESP+ / PCX 160 / ADV 160 (4 Katup)',
+                'unit' => 'set',
+                'purchase_price' => 160000,
+                'selling_price' => 235000,
+                'stock' => 3, // low stock!
+                'min_stock' => 6,
+                'location' => 'Rak C-02 (Piston Kit)',
+                'description' => 'Paket piston lengkap ring seher, pin piston, dan klip pengunci untuk mesin eSP+ 4 valve',
+                'image' => 'images/products/piston_kit.jpg',
+            ],
+            [
+                'category_id' => $catOil->id,
+                'sku' => 'OIL-MOTUL-SCOOT',
+                'name' => 'Oli Mesin Motul Scooter Expert LE 4T 10W-40 Technosynthese 1 Liter',
+                'brand' => 'Motul',
+                'model_series' => 'Semua Motor Matic 110cc - 250cc',
+                'unit' => 'botol',
+                'purchase_price' => 78000,
+                'selling_price' => 105000,
                 'stock' => 45,
                 'min_stock' => 15,
-                'location' => 'Rak A-01',
-                'description' => 'Gigi bucket tipe tiger khusus tanah keras & bebatuan tambang',
+                'location' => 'Rak D-01 (Pelumas Oli)',
+                'description' => 'Oli semi sintetik JASO MB API SM dengan aditif pembersih kerak mesin matic suhu tinggi',
+                'image' => 'images/products/oli_mesin.jpg',
             ],
             [
-                'category_id' => $catGET->id,
-                'sku' => 'GET-PIN-PC200',
-                'name' => 'Pin & Lock Bucket Tooth PC200 (09244-02496)',
-                'brand' => 'Komatsu OEM',
-                'model_series' => 'PC200-8',
-                'unit' => 'set',
-                'purchase_price' => 35000,
-                'selling_price' => 55000,
-                'stock' => 80,
-                'min_stock' => 20,
-                'location' => 'Rak A-02',
-                'description' => 'Pin pengunci bucket tooth berbahan baja presisi tahan getaran',
-            ],
-            [
-                'category_id' => $catEngine->id,
-                'sku' => 'ENG-FLT-CAT320',
-                'name' => 'Fuel Water Separator Filter Element (1R-0770)',
-                'brand' => 'Caterpillar Genuine',
-                'model_series' => 'CAT 320D / 320D2',
-                'unit' => 'pcs',
-                'purchase_price' => 380000,
-                'selling_price' => 520000,
-                'stock' => 4, // low stock!
-                'min_stock' => 10,
-                'location' => 'Rak B-05',
-                'description' => 'Filter pemisah air dan solar biosolar B35 untuk excavator Cat 320D',
-            ],
-            [
-                'category_id' => $catEngine->id,
-                'sku' => 'ENG-OIL-6D102',
-                'name' => 'Oil Filter Lube Element (6736-51-5142)',
-                'brand' => 'Fleetguard / Cummins',
-                'model_series' => 'SAA6D102E-2 / PC200-7',
-                'unit' => 'pcs',
-                'purchase_price' => 195000,
-                'selling_price' => 285000,
+                'category_id' => $catElec->id,
+                'sku' => 'ELC-AKI-GTZ5S',
+                'name' => 'Aki Motor Kering Bebas Perawatan GS Astra Maintenance Free GTZ-5S',
+                'brand' => 'GS Astra',
+                'model_series' => 'Beat, Vario 110, Mio M3, Scoopy, Supra X 125, Vixion',
+                'unit' => 'unit',
+                'purchase_price' => 185000,
+                'selling_price' => 245000,
                 'stock' => 18,
                 'min_stock' => 8,
-                'location' => 'Rak B-06',
-                'description' => 'Filter oli mesin kapasitas tinggi untuk daya tahan operasi berat',
+                'location' => 'Rak E-01 (Aki & Battery)',
+                'description' => 'Aki kering 12V 3.5Ah siap pasang anti tumpah dengan CCA tinggi untuk starter elektrik',
+                'image' => 'images/products/aki_motor.jpg',
             ],
             [
-                'category_id' => $catHydraulic->id,
-                'sku' => 'HYD-SEAL-BOOM200',
-                'name' => 'Seal Kit Boom Cylinder PC200-8 (707-99-46320)',
-                'brand' => 'NOK Japan Genuine',
-                'model_series' => 'PC200-8',
+                'category_id' => $catElec->id,
+                'sku' => 'ELC-LAMP-BILED',
+                'name' => 'Lampu Depan Biled Projector AES Turbo SE All Weather 2.5 Inch 55W',
+                'brand' => 'AES Projector',
+                'model_series' => 'Universal Custom Motor Bebek, Matic & Sport',
                 'unit' => 'set',
-                'purchase_price' => 1250000,
-                'selling_price' => 1750000,
-                'stock' => 2, // low stock!
-                'min_stock' => 5,
-                'location' => 'Rak C-02',
-                'description' => 'Seal kit hidrolik tahan tekanan tinggi 350 bar bahan polyurethane/FKM',
-            ],
-            [
-                'category_id' => $catHydraulic->id,
-                'sku' => 'HYD-SEAL-ARM320',
-                'name' => 'Seal Kit Arm Cylinder CAT 320D (247-8890)',
-                'brand' => 'Caterpillar OEM',
-                'model_series' => 'CAT 320D',
-                'unit' => 'set',
-                'purchase_price' => 1400000,
-                'selling_price' => 1980000,
-                'stock' => 6,
+                'purchase_price' => 420000,
+                'selling_price' => 580000,
+                'stock' => 8,
                 'min_stock' => 4,
-                'location' => 'Rak C-03',
-                'description' => 'Seal kit hidrolik arm stick silinder lengkap o-ring dan wear ring',
+                'location' => 'Rak E-04 (Penerangan LED)',
+                'description' => 'Lensa biled cut-off tajam dengan kipas pendingin high-speed dan driver tahan fluktuasi voltase',
+                'image' => 'images/products/lampu_led.svg',
             ],
             [
-                'category_id' => $catUndercarriage->id,
-                'sku' => 'UND-TR-PC200',
-                'name' => 'Track Roller Single Flange PC200-8 (20Y-30-00016)',
-                'brand' => 'Berco Italy',
-                'model_series' => 'PC200-8',
-                'unit' => 'pcs',
-                'purchase_price' => 1850000,
-                'selling_price' => 2450000,
+                'category_id' => $catChassis->id,
+                'sku' => 'SUS-SHOCK-RCB',
+                'name' => 'Shockbreaker Tabung RCB VD Series 330mm Click Rebound Adjustable',
+                'brand' => 'Racing Boy (RCB)',
+                'model_series' => 'Vario 125/150, Beat, Scoopy, Mio',
+                'unit' => 'pasang',
+                'purchase_price' => 1250000,
+                'selling_price' => 1650000,
+                'stock' => 6,
+                'min_stock' => 3,
+                'location' => 'Rak F-02 (Suspensi)',
+                'description' => 'Suspensi tabung gas nitrogen dengan setelan preload dan rebound klik empuk untuk harian & touring',
+                'image' => 'images/products/shockbreaker.jpg',
+            ],
+            [
+                'category_id' => $catChassis->id,
+                'sku' => 'DRV-CHAIN-SSS',
+                'name' => 'Gear Set Paket Rantai SSS Racing Gold 415 / 428 Heavy Duty',
+                'brand' => 'SSS Sprocket',
+                'model_series' => 'CBR150R / CB150R / MX King 150 / Sonic 150R',
+                'unit' => 'set',
+                'purchase_price' => 245000,
+                'selling_price' => 335000,
                 'stock' => 14,
-                'min_stock' => 6,
-                'location' => 'Gudang Bawah G-01',
-                'description' => 'Roller roda bawah rel undercarriage excavator tahan beban kejut tinggi',
+                'min_stock' => 5,
+                'location' => 'Rak F-05 (Rantai & Gear)',
+                'description' => 'Sprocket baja karbon presisi tinggi dengan rantai emas tahan mulur untuk motor kopling sport',
+                'image' => 'images/products/gear_set.jpg',
             ],
             [
-                'category_id' => $catUndercarriage->id,
-                'sku' => 'UND-IDL-CAT320',
-                'name' => 'Front Idler Assembly CAT 320D (102-8151)',
-                'brand' => 'ITM Italtractor',
-                'model_series' => 'CAT 320C / 320D',
+                'category_id' => $catChassis->id,
+                'sku' => 'BAN-MAXXIS-VIC',
+                'name' => 'Ban Motor Tubeless Maxxis Victra S98 ST 90/80-14 Soft Compound Dual',
+                'brand' => 'Maxxis Tire',
+                'model_series' => 'Pelek Ring 14 Beat / Vario / Scoopy / Mio / Aerox',
                 'unit' => 'pcs',
-                'purchase_price' => 6200000,
-                'selling_price' => 7900000,
-                'stock' => 1, // critical low stock!
-                'min_stock' => 3,
-                'location' => 'Gudang Bawah G-04',
-                'description' => 'Idler roda pemandu depan track undercarriage lengkap braket dan shaft',
-            ],
-            [
-                'category_id' => $catElectrical->id,
-                'sku' => 'ELC-STR-24V',
-                'name' => 'Starter Motor 24V 7.5kW PC200-8 (600-863-5111)',
-                'brand' => 'Denso Heavy Duty',
-                'model_series' => 'PC200-8 / Komatsu 6D107',
-                'unit' => 'unit',
-                'purchase_price' => 4800000,
-                'selling_price' => 6200000,
-                'stock' => 3,
-                'min_stock' => 2,
-                'location' => 'Rak D-01',
-                'description' => 'Motor starter 24 Volt torsi tinggi tahan getaran & debu tambang',
-            ],
-            [
-                'category_id' => $catElectrical->id,
-                'sku' => 'ELC-ALT-24V',
-                'name' => 'Alternator Dynamo 24V 60A CAT 320D (344-5081)',
-                'brand' => 'Delco Remy',
-                'model_series' => 'CAT 320D C6.4 Engine',
-                'unit' => 'unit',
-                'purchase_price' => 3200000,
-                'selling_price' => 4150000,
-                'stock' => 5,
-                'min_stock' => 3,
-                'location' => 'Rak D-02',
-                'description' => 'Dinamo ampere pengisian aki 24 Volt tugas berat',
+                'purchase_price' => 250000,
+                'selling_price' => 330000,
+                'stock' => 22,
+                'min_stock' => 8,
+                'location' => 'Gudang Ban Belakang',
+                'description' => 'Ban tubeless kompon lunak daya cengkeram maksimal di aspal kering maupun basah',
+                'image' => 'images/products/ban_motor.jpg',
             ],
         ];
 
         foreach ($productsData as $p) {
-            Product::firstOrCreate(['sku' => $p['sku']], $p);
+            Product::updateOrCreate(['sku' => $p['sku']], $p);
         }
 
         // 5. Seed Historical Purchases & Stock-in Transaction
-        $prod1 = Product::where('sku', 'GET-BT-PC200')->first();
-        $prod2 = Product::where('sku', 'GET-PIN-PC200')->first();
+        $prod1 = Product::where('sku', 'CVT-VBLT-BEAT')->first();
+        $prod2 = Product::where('sku', 'OIL-MOTUL-SCOOT')->first();
 
         $purchase = Purchase::firstOrCreate(
             ['reference_no' => 'PO-' . date('Ymd') . '-0001'],
             [
-                'supplier_id' => $sup2->id,
+                'supplier_id' => $sup1->id,
                 'user_id' => $staff1->id,
                 'purchase_date' => Carbon::now()->subDays(2)->toDateString(),
                 'status' => 'completed',
-                'total_amount' => (20 * 240000) + (30 * 35000), // 4,800,000 + 1,050,000 = 5,850,000
-                'notes' => 'Restock rutin kuartal komponen bucket teeth & pin Komatsu PC200',
+                'total_amount' => (20 * 95000) + (30 * 78000), // 1,900,000 + 2,340,000 = 4,240,000
+                'notes' => 'Restock rutin V-Belt AHM Beat FI dan Oli Motul Scooter Expert 1L',
             ]
         );
 
@@ -339,8 +372,8 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'quantity' => 20,
-                'unit_cost' => 240000,
-                'subtotal' => 20 * 240000,
+                'unit_cost' => 95000,
+                'subtotal' => 20 * 95000,
             ]
         );
 
@@ -351,8 +384,8 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'quantity' => 30,
-                'unit_cost' => 35000,
-                'subtotal' => 30 * 35000,
+                'unit_cost' => 78000,
+                'subtotal' => 30 * 78000,
             ]
         );
 
@@ -360,16 +393,16 @@ class DatabaseSeeder extends Seeder
         $sale = Sale::firstOrCreate(
             ['invoice_no' => 'INV-' . date('Ymd') . '-0001'],
             [
-                'customer_name' => 'CV Mandiri Tambang Abadi',
+                'customer_name' => 'Bengkel Motor Berkah Jaya',
                 'customer_phone' => '081122334455',
                 'user_id' => $staff1->id,
                 'sale_date' => Carbon::now()->toDateString(),
                 'status' => 'completed',
-                'total_amount' => (5 * 350000) + (10 * 55000), // 1,750,000 + 550,000 = 2,300,000
-                'paid_amount' => 2500000,
-                'change_amount' => 200000,
-                'payment_method' => 'transfer',
-                'notes' => 'Pengiriman site quarry pasir Bogor, via pickup logistik ekspress',
+                'total_amount' => (2 * 145000) + (4 * 105000), // 290,000 + 420,000 = 710,000
+                'paid_amount' => 750000,
+                'change_amount' => 40000,
+                'payment_method' => 'cash',
+                'notes' => 'Servis berkala & ganti V-belt Beat FI pelanggan bengkel',
             ]
         );
 
@@ -379,9 +412,9 @@ class DatabaseSeeder extends Seeder
                 'product_id' => $prod1->id,
             ],
             [
-                'quantity' => 5,
-                'unit_price' => 350000,
-                'subtotal' => 5 * 350000,
+                'quantity' => 2,
+                'unit_price' => 145000,
+                'subtotal' => 2 * 145000,
             ]
         );
 
@@ -391,9 +424,9 @@ class DatabaseSeeder extends Seeder
                 'product_id' => $prod2->id,
             ],
             [
-                'quantity' => 10,
-                'unit_price' => 55000,
-                'subtotal' => 10 * 55000,
+                'quantity' => 4,
+                'unit_price' => 105000,
+                'subtotal' => 4 * 105000,
             ]
         );
     }

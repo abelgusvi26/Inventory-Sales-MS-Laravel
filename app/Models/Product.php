@@ -23,6 +23,7 @@ class Product extends Model
         'min_stock',
         'location',
         'description',
+        'image',
     ];
 
     protected $casts = [
@@ -59,5 +60,23 @@ class Product extends Model
     public function hasTransactions(): bool
     {
         return $this->purchaseItems()->exists() || $this->saleItems()->exists();
+    }
+
+    /**
+     * Helper to get product image URL or fallback placeholder
+     */
+    public function imageUrl(): string
+    {
+        if ($this->image) {
+            if (str_starts_with($this->image, 'http://') || str_starts_with($this->image, 'https://')) {
+                return $this->image;
+            }
+            if (str_starts_with($this->image, 'images/')) {
+                return asset($this->image);
+            }
+            return asset('storage/' . $this->image);
+        }
+
+        return asset('images/products/placeholder.svg');
     }
 }

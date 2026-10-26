@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_oil" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#451a03"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="bottle" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="50%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#991b1b"/>
+    </linearGradient>
+    <linearGradient id="oil_gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg_oil)"/>
+
+  <!-- Oil Bottle 1L -->
+  <g transform="translate(160, 45)">
+    <!-- Cap -->
+    <rect x="25" y="5" width="30" height="18" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <line x1="28" y1="10" x2="28" y2="18" stroke="#94a3b8" stroke-width="2"/>
+    <line x1="35" y1="10" x2="35" y2="18" stroke="#94a3b8" stroke-width="2"/>
+    <line x1="42" y1="10" x2="42" y2="18" stroke="#94a3b8" stroke-width="2"/>
+    <line x1="49" y1="10" x2="49" y2="18" stroke="#94a3b8" stroke-width="2"/>
+
+    <!-- Neck -->
+    <polygon points="32,23 48,23 58,45 22,45" fill="url(#bottle)"/>
+
+    <!-- Handle & Body -->
+    <path d="M 22 45 L 70 45 L 85 70 L 85 155 Q 85 165 75 165 L 5 165 Q -5 165 -5 155 L -5 85 Q -5 55 22 45 Z" fill="url(#bottle)" stroke="#7f1d1d" stroke-width="2"/>
+
+    <!-- Label Sticker -->
+    <rect x="5" y="70" width="70" height="75" rx="5" fill="#0f172a" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="40" y="88" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="11" font-weight="800" fill="#fbbf24" text-anchor="middle">MOTUL</text>
+    <text x="40" y="103" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="13" font-weight="900" fill="#ffffff" text-anchor="middle">10W-40</text>
+    <text x="40" y="118" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="8" font-weight="700" fill="#38bdf8" text-anchor="middle">4T FULL SYN</text>
+    
+    <!-- Golden Oil Droplet -->
+    <path d="M 40 124 C 40 124 33 133 33 136 C 33 140 36 143 40 143 C 44 143 47 140 47 136 C 47 133 40 124 40 124 Z" fill="url(#oil_gold)"/>
+  </g>
+
+  <!-- Spark Plug companion -->
+  <g transform="translate(270, 95) rotate(25)">
+    <!-- Terminal stud -->
+    <rect x="0" y="0" width="8" height="12" rx="2" fill="#e2e8f0"/>
+    <!-- Ceramic insulator -->
+    <rect x="-3" y="12" width="14" height="28" rx="2" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+    <line x1="-3" y1="18" x2="11" y2="18" stroke="#3b82f6" stroke-width="2"/>
+    <line x1="-3" y1="26" x2="11" y2="26" stroke="#3b82f6" stroke-width="2"/>
+    <!-- Hex nut metal -->
+    <rect x="-6" y="40" width="20" height="16" fill="#94a3b8" stroke="#475569" stroke-width="1"/>
+    <!-- Threaded body -->
+    <rect x="-4" y="56" width="16" height="24" fill="#64748b"/>
+    <!-- Electrode spark -->
+    <line x1="4" y1="80" x2="4" y2="86" stroke="#f59e0b" stroke-width="2.5"/>
+    <path d="M 0 88 L 4 88" stroke="#94a3b8" stroke-width="2"/>
+  </g>
+
+  <!-- Badge / Tag -->
+  <rect x="25" y="25" width="120" height="26" rx="6" fill="#f59e0b"/>
+  <text x="85" y="42" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="11" font-weight="800" fill="#0f172a" text-anchor="middle">OLI & PELUMAS</text>
+
+  <!-- Title -->
+  <text x="200" y="240" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="17" font-weight="800" fill="#ffffff" text-anchor="middle">Oli Mesin 4T Matic / Bebek 10W-40 1L</text>
+  <text x="200" y="265" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="12" font-weight="600" fill="#38bdf8" text-anchor="middle">Motul Scooter Expert / AHM MPX2 Synthetic</text>
+</svg>

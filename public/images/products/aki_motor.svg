@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_elec" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#172554"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="battery_body" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="50%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg_elec)"/>
+
+  <!-- Battery Akki GS / Yuasa -->
+  <g transform="translate(135, 55)">
+    <!-- Battery case top cover -->
+    <rect x="0" y="25" width="130" height="20" rx="3" fill="#1e3a8a" stroke="#1d4ed8" stroke-width="1.5"/>
+    
+    <!-- Terminals (+ and -) -->
+    <!-- Positive terminal Red -->
+    <rect x="15" y="10" width="22" height="15" rx="3" fill="#dc2626"/>
+    <text x="26" y="22" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="14" font-weight="900" fill="#ffffff" text-anchor="middle">+</text>
+    
+    <!-- Negative terminal Blue/Dark -->
+    <rect x="93" y="10" width="22" height="15" rx="3" fill="#475569"/>
+    <text x="104" y="21" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="16" font-weight="900" fill="#ffffff" text-anchor="middle">-</text>
+
+    <!-- Main Battery Body -->
+    <rect x="0" y="45" width="130" height="95" rx="4" fill="url(#battery_body)" stroke="#475569" stroke-width="2"/>
+
+    <!-- Ribs / Grip texture -->
+    <line x1="10" y1="60" x2="10" y2="125" stroke="#475569" stroke-width="2"/>
+    <line x1="120" y1="60" x2="120" y2="125" stroke="#475569" stroke-width="2"/>
+
+    <!-- Brand Badge -->
+    <rect x="25" y="65" width="80" height="50" rx="4" fill="#1e3a8a" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="65" y="86" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="13" font-weight="900" fill="#ffffff" text-anchor="middle">GS ASTRA</text>
+    <text x="65" y="102" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="10" font-weight="700" fill="#fbbf24" text-anchor="middle">GTZ-5S MF</text>
+  </g>
+
+  <!-- Spark / Electricity icon -->
+  <g transform="translate(280, 85)">
+    <polygon points="15,0 0,25 14,25 5,48 30,18 16,18" fill="#fbbf24" stroke="#d97706" stroke-width="1.5"/>
+    <circle cx="15" cy="24" r="32" fill="none" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="4,4"/>
+  </g>
+
+  <!-- Badge / Tag -->
+  <rect x="25" y="25" width="135" height="26" rx="6" fill="#3b82f6"/>
+  <text x="92" y="42" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="11" font-weight="800" fill="#ffffff" text-anchor="middle">KELISTRIKAN / AKI</text>
+
+  <!-- Title -->
+  <text x="200" y="240" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="17" font-weight="800" fill="#ffffff" text-anchor="middle">Aki Motor Kering Bebas Perawatan (MF)</text>
+  <text x="200" y="265" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="12" font-weight="600" fill="#38bdf8" text-anchor="middle">GS Astra / Yuasa GTZ-5S 12V 3.5Ah</text>
+</svg>
