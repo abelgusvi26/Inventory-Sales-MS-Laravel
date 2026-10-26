@@ -656,6 +656,12 @@
                     </a>
                 @endif
             @endif
+
+            <div class="menu-category">Panduan & Teknis</div>
+            <a href="{{ route('documentation') }}" class="nav-item {{ request()->routeIs('documentation') ? 'active' : '' }}">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Dokumentasi & ERD</span>
+            </a>
         </nav>
 
         <div class="sidebar-footer">

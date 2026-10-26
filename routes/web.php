@@ -76,4 +76,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/purchases/{purchase}/cancel', [PurchaseController::class, 'cancel'])->name('purchases.cancel');
         Route::post('/sales/{sale}/cancel', [SaleController::class, 'cancel'])->name('sales.cancel');
     });
+
+    // 5. System Documentation & ERD Page (UTS Reference)
+    Route::get('/documentation', function () {
+        return view('documentation.index');
+    })->name('documentation');
 });
+
